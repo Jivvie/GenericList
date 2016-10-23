@@ -38,17 +38,16 @@ public class GenericList<E> implements GeneralList<E> {
     too much or too little memory. We also do not want to make unnecessary loops to our resizze method every time the user
     wants to add more objects. Adding 10 more null elements to our array is ideal.
      */
-    void resize() {
+    private void resize() {
         int newLength = (list.length + DEFAULT_LIST_SIZE) + 10;
-        E newList[] = (E[]) new Object[newLength];
-        for (int i = 0; i < list.length; i++) {
+        E[] newList = (E[]) new Object[newLength];
+        for (int i = 0; i < list.length; i++)
             newList[i] = list[i];
-        }
         this.list = newList;
         numOfObjects = newList.length - 1;
     }
 
-    public String[] toStringArray() {
+    private String[] toStringArray() {
         String[] strings = new String[numOfObjects];
         for (int i = 0; i < numOfObjects; i++) {
             strings[i] = String.valueOf(list[i]);
@@ -58,7 +57,8 @@ public class GenericList<E> implements GeneralList<E> {
 
     @Override
     public String toString() {
-        String s = Arrays.toString(toStringArray());
+        String s;
+        s = Arrays.toString(toStringArray());
         return s;
     }
 
@@ -83,9 +83,7 @@ public class GenericList<E> implements GeneralList<E> {
             throw new ArrayIndexOutOfBoundsException();
         }
 
-        for (int i = numOfObjects; i > index; i--) {
-            list[i] = list[i - 1];
-        }
+        for (int i = numOfObjects; i > index; i--) list[i] = list[i - 1];
         list[index] = Object;
         //We added an object so our variable needs to be updated.
         numOfObjects++;
@@ -93,21 +91,17 @@ public class GenericList<E> implements GeneralList<E> {
 
     @Override
     public void clear() {
-        for (int i = numOfObjects - 1; i >= 0; i--) {
-            list[i] = null;
-        }
+        for (int i = numOfObjects - 1; i >= 0; i--) list[i] = null;
 
         numOfObjects = 0;
     }
 
     @Override
     public boolean contains(E Object) {
-        boolean found = false;
-        for (int i = 0; i < numOfObjects; i++) {
+        for (int i = 0; i < numOfObjects; i++)
             if (list[i] == Object) {
                 return true;
             }
-        }
         return false;
     }
 
@@ -124,11 +118,10 @@ public class GenericList<E> implements GeneralList<E> {
 
     @Override
     public int indexOf(E Object) {
-        for (int index = 0; index < numOfObjects; index++) {
+        for (int index = 0; index < numOfObjects; index++)
             if (list[index].equals(Object)) {
                 return index;
             }
-        }
         return -1;
     }
 
@@ -141,7 +134,7 @@ public class GenericList<E> implements GeneralList<E> {
         return false;
     }
 
-    
+
     //TODO: DEFINE METHODS
     @Override
     public boolean remove(E Object) {
