@@ -3,27 +3,57 @@ package ListPackage.gjvon;
 /**
  * Created by Gjvon on 10/14/16.
  */
-public class GenericLinkedList<E> implements GeneralList<E>{
+public class GenericLinkedList<E> implements GeneralList<E> {
 
-    private class Node{
-        E value;
-        Node next;
+    //global variables
+    private Node firstNode;
+    private Node lastNode;
+
+    public GenericLinkedList() {
+        //initialize global variables;
+        firstNode = null;
+        lastNode = null;
     }
 
-
     @Override
-    public void add(E Object) {
-
+    public void add(E value) {
+        if (isEmpty()) {
+            firstNode = new Node(value);
+            lastNode = firstNode;
+        } else {
+            lastNode.next = new Node(value);
+            lastNode = lastNode.next;
+        }
     }
 
     @Override
-    public void add(int index, E Object) {
+    public void add(int index, E value) {
+        /*This node will transverse through our nodes to figure out where it belongs.*/
+        Node NodeToInsert = firstNode;
+        if (index < 0 || index > size()) {
+            new ArrayIndexOutOfBoundsException();
+        } else if (index == 0) {
+            firstNode = new Node(value, firstNode);
+            if (lastNode == null) {
+                lastNode = firstNode;
+            }
+        }
+        for (int count = 1; count <= index - 1; count++) {
+            NodeToInsert = NodeToInsert.next;
+            count++;
+        }
 
+        NodeToInsert = new Node(value, NodeToInsert.next);
+        //what if there are no more elements in the list or the list has only one element?
+        //this if statement inserts the value into that position.
+        if (NodeToInsert.next.next == null) {
+            lastNode = NodeToInsert.next;
+        }
     }
 
     @Override
     public void clear() {
-
+        firstNode = null;
     }
 
     @Override
@@ -63,6 +93,43 @@ public class GenericLinkedList<E> implements GeneralList<E>{
 
     @Override
     public int size() {
-        return 0;
+        Node n = firstNode;
+        int count = 0;
+        while (n != null) {
+            count++;
+            n = n.next;
+        }
+        System.out.println("This is ArrayList has " + count + " elements! ");
+        return count;
+    }
+
+    boolean isEmpty() {
+        return firstNode == null;
+    }
+
+    public String toString() {
+        Node n = firstNode;
+        StringBuilder str = new StringBuilder();
+        str.append("Values: ");
+        while (n != null) {
+            str.append(n.value + "/");
+            n = n.next;
+        }
+        //JOptionPane.showMessageDialog(null, str.toString());
+        return str.toString();
+    }
+
+    private class Node {
+        E value;
+        Node next;
+
+        Node(E value) {
+            this(value, null);
+        }
+
+        Node(E value, Node node) {
+            this.value = value;
+            next = node;
+        }
     }
 }
