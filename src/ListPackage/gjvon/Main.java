@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         final String DONE_PROMPT = "Are you done adding values? Press Y if you are. Note: The value you enter will not"
-                + " be added";
+                + " be added. Use N for no; for clarity.";
         final String PROMPT = "Enter your value.";
         GenericLinkedList generics = new GenericLinkedList();
         boolean done = false;
@@ -21,7 +21,11 @@ public class Main {
                 done = true;
             }
         }
-        System.out.println(generics.toString());
+        //System.out.println(generics.toString());
+        JOptionPane.showMessageDialog(null, generics.toString());
+        Display d = new Display();
+        d.enterDataintoList();
+        System.exit(0);
     }
 
     public static boolean clickedDone(String y) {

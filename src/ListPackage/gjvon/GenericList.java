@@ -11,7 +11,6 @@ public class GenericList<E> implements GeneralList<E> {
     private final int DEFAULT_LIST_SIZE = 10;
     private E list[];
     private int numOfObjects;
-
     /*
     Default class instance:
     If user does not add the amount of values needed we will give them a free 10 element array.
