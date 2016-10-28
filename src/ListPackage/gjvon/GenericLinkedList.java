@@ -8,11 +8,17 @@ public class GenericLinkedList<E> implements GeneralList<E> {
     //global variables
     private Node firstNode;
     private Node lastNode;
-
+    public Node list = firstNode;
     public GenericLinkedList() {
         //initialize global variables;
         firstNode = null;
         lastNode = null;
+    }
+
+
+    public Node getGenericList()
+    {
+        return firstNode;
     }
 
     @Override
