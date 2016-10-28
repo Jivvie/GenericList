@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.InputMismatchException;
 
 /**
- * Created by Gjvon on 10/25/16.
+ * Created by Gjvon on 10/25/16..
  */
 public class Display extends JFrame {
     Object listOfNodes;
