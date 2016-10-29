@@ -4,19 +4,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.InputMismatchException;
 
 /**
  * Created by Gjvon on 10/25/16...
  */
 public class Display extends JFrame {
-    Object listOfNodes;
-    GenericLinkedList listObject;
     //constants
     final String INFORMATION = "You may click on the buttons to do anything you would like to. I assume steps are" +
             "self explanatory. To my knowledge, you understand what you are able to do.";
+    //ToDO: Configure for 4K Resolution // In reference to display Witdth
     final int WIDTH = 700;
+    //ToDO: Configure for 4K Resolution //In reference to display   length
     final int HEIGHT = 300;
+    Object listOfNodes;
+    GenericLinkedList listObject;
     //panel and its objects
     private JPanel panel;
     private JButton removeAtIndexBtn;
@@ -64,33 +65,28 @@ public class Display extends JFrame {
         this.setVisible(true);
     }
 
-    public void D_removeAtIndex()
-    {
+    public void D_removeAtIndex() {
         String index = JOptionPane.showInputDialog(null, "Remove value at what Index?");
         int indexToInt = -1;
         try {
             indexToInt = Integer.parseInt(String.valueOf(index));
-        }catch (NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "INCORRECT VALUE!!!!", "Wrong Input", JOptionPane.ERROR_MESSAGE);
         }
-        if(indexToInt > -1){
+        if (indexToInt > -1) {
             listObject.remove(indexToInt);
         }
     }
 
-    public void D_clearList()
-    {
+    public void D_clearList() {
         listObject.clear();
     }
 
-    public void D_addAtIndex(int index)
-    {
+    public void D_addAtIndex(int index) {
         listObject.add(index);
     }
 
-    public void D_viewAllElements()
-    {
+    public void D_viewAllElements() {
         JOptionPane.showMessageDialog(null, listObject.toString());
     }
 
@@ -117,6 +113,10 @@ public class Display extends JFrame {
         }
     }
 
+    private class RemoveAtIndexBTNClicked {
+
+    }
+
     private class DoneBtnClicked implements ActionListener {
 
         @Override
@@ -125,8 +125,7 @@ public class Display extends JFrame {
         }
     }
 
-    private class ViewAllElementClicked implements ActionListener
-    {
+    private class ViewAllElementClicked implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {

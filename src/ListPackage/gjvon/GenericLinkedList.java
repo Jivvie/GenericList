@@ -7,8 +7,8 @@ public class GenericLinkedList<E> implements GeneralList<E> {
 
     //global variables
     private Node firstNode;
-    private Node lastNode;
     public Node list = firstNode;
+    private Node lastNode;
     public GenericLinkedList() {
         //initialize global variables;
         firstNode = null;
@@ -89,24 +89,22 @@ public class GenericLinkedList<E> implements GeneralList<E> {
 
     @Override
     public E remove(int index) {
-        Node nodeToRemove = firstNode;
-        int numOfElements = index + 1;
-        int counter = 0;
+        Node NodeWithWantedValue = firstNode;
+        int nodePosition = index + 1;
+        int counter;
+        for (counter = 0; counter < this.size(); counter++) {
+            if (counter < nodePosition) {
+                NodeWithWantedValue.value = NodeWithWantedValue.next.value;
+                NodeWithWantedValue = NodeWithWantedValue.next;
+            } else if (NodeWithWantedValue.next == null) {
+                NodeWithWantedValue.next = lastNode;
 
-        if (index == 0) {
-
-        }
-
-        while (counter <= this.size()) {
-            nodeToRemove = nodeToRemove.next;
-            counter++;
-            if (counter == numOfElements) {
-                nodeToRemove.next = null;
-                nodeToRemove.next = nodeToRemove.next.next;
-                nodeToRemove = nodeToRemove.next;
+            } else {
+                NodeWithWantedValue.value = NodeWithWantedValue.next.value;
+                NodeWithWantedValue = NodeWithWantedValue.next;
             }
         }
-        firstNode = nodeToRemove;
+
         return (E) firstNode;
     }
 
