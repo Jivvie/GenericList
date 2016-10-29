@@ -89,7 +89,25 @@ public class GenericLinkedList<E> implements GeneralList<E> {
 
     @Override
     public E remove(int index) {
-        return null;
+        Node nodeToRemove = firstNode;
+        int numOfElements = index + 1;
+        int counter = 0;
+
+        if (index == 0) {
+
+        }
+
+        while (counter <= this.size()) {
+            nodeToRemove = nodeToRemove.next;
+            counter++;
+            if (counter == numOfElements) {
+                nodeToRemove.next = null;
+                nodeToRemove.next = nodeToRemove.next.next;
+                nodeToRemove = nodeToRemove.next;
+            }
+        }
+        firstNode = nodeToRemove;
+        return (E) firstNode;
     }
 
     @Override
@@ -125,6 +143,7 @@ public class GenericLinkedList<E> implements GeneralList<E> {
         return str.toString();
     }
 
+    //Node Class
     private class Node {
         E value;
         Node next;
