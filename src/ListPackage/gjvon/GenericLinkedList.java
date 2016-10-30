@@ -9,6 +9,7 @@ public class GenericLinkedList<E> implements GeneralList<E> {
     private Node firstNode;
     public Node list = firstNode;
     private Node lastNode;
+
     public GenericLinkedList() {
         //initialize global variables;
         firstNode = null;
@@ -16,8 +17,7 @@ public class GenericLinkedList<E> implements GeneralList<E> {
     }
 
 
-    public Node getGenericList()
-    {
+    public Node getGenericList() {
         return firstNode;
     }
 
@@ -90,22 +90,33 @@ public class GenericLinkedList<E> implements GeneralList<E> {
     @Override
     public E remove(int index) {
         Node NodeWithWantedValue = firstNode;
-        int nodePosition = index + 1;
+        E listJumpingValue = firstNode.value;
         int counter;
-        for (counter = 0; counter < this.size(); counter++) {
-            if (counter < nodePosition) {
-                NodeWithWantedValue.value = NodeWithWantedValue.next.value;
-                NodeWithWantedValue = NodeWithWantedValue.next;
-            } else if (NodeWithWantedValue.next == null) {
-                NodeWithWantedValue.next = lastNode;
-
-            } else {
-                NodeWithWantedValue.value = NodeWithWantedValue.next.value;
+        /* ToDO: Find out why the code below does not work.
+           I do not understand why Java does not allow this type of referencing.
+         */
+        /*if (index == 0) {
+            NodeWithWantedValue = NodeWithWantedValue.next;
+            if (NodeWithWantedValue == null) {
+                lastNode = NodeWithWantedValue;
+            }*/
+        if (index == 0) {
+            firstNode = firstNode.next;
+            if (firstNode == null) {
+                lastNode = firstNode;
+            }
+        } else {
+            for (counter = 1; counter <= index - 1; counter++) {
                 NodeWithWantedValue = NodeWithWantedValue.next;
             }
-        }
 
-        return (E) firstNode;
+            NodeWithWantedValue.next = NodeWithWantedValue.next.next;
+
+            if (NodeWithWantedValue.next == null) {
+                lastNode = NodeWithWantedValue;
+            }
+        }
+        return listJumpingValue;
     }
 
     @Override
